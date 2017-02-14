@@ -24,3 +24,41 @@ function setInterval(callback, interval) {
 function clearInterval(task) {
 	if(task instanceof Task && task.running) task.cancel();
 };
+
+function postln() {
+	post(arg2array(arguments), "\n");
+}
+
+function postJson(obj) {
+	postln(JSON.stringify(obj, null, "  "));
+}
+
+function extend(dst, src) {
+	for(var key in src) {
+		if(src.hasOwnProperty(key)) dst[key] = src[key];
+	}
+}
+
+function modulalize(obj) {
+	try {
+		if(exports) {
+			extend(exports, obj);
+		}
+	} catch(err) {
+		if(err.message != "exports is not defined") {
+			postln(JSON.stringify(err));
+		}
+	}
+}
+
+modulalize({
+	arg2array: arg2array,
+	setTimeout: setTimeout,
+	clearTimeout: clearTimeout,
+	setInterval: setInterval,
+	clearInterval: clearInterval,
+	postln: postln,
+	postJson: postJson,
+	extend: extend,
+	modulalize: modulalize
+});
