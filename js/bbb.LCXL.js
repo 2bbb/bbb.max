@@ -1,5 +1,4 @@
 var bbb = require('bbb');
-include('bbb');
 var Constants = require('bbb.LCXL.constants');
 
 outlets = 2;
@@ -44,7 +43,7 @@ function set_led(ch, note, value, type, index, color) {
 
 function set_template(template_id) {
 	template_index = template_id || 0;
-	post("bbb.LCXL: set template to " + (template_index + 1), "\n");
+	postln("bbb.LCXL: set template to " + (template_index + 1));
 	template_sysex[7] = template_index;
 	outlet(1, template_sysex);
 }
@@ -68,7 +67,7 @@ function set_toggle(template_id, type, index, enable) {
 	}
 	toggle_sysex[7] = template_id;
 	toggle_sysex[9] = enable ? 127 : 0;
-	bbb.postln("bbb.LCXL: set toggle (" + template_id, type, index, enable, ")");
+	postln("bbb.LCXL: set toggle (" + template_id, type, index, enable, ")");
 	outlet(1, toggle_sysex);
 }
 
