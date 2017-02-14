@@ -22,8 +22,20 @@ function anything() {
 		prepending_str = messagename;
 		return;
 	}
-	if(messagename[0] == '/') {
-		var arr = arrayfromargs(prepending_str + messagename, arguments);
+	if(messagename == "msg_int") {
+		var arr = arrayfromargs(arguments);
+		arr[0] = (prepending_str + "/" + arr[0]).replace(/\/\//gi, "/");
 		outlet(0, arr);
+		return;
 	}
+	if(messagename == "list") {
+		var arr = arrayfromargs(arguments);
+		arr[0] = (prepending_str + "/" + arr[0]).replace(/\/\//gi, "/");
+		outlet(0, arr);
+		return;
+	}
+	var address = (prepending_str + messagename).replace(/\/\//gi, "/");
+	if(address[0] != "/") address = "/" + address;
+	var arr = arrayfromargs(address, arguments);
+	outlet(0, arr);
 }

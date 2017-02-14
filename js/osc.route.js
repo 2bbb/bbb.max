@@ -22,7 +22,6 @@ setoutletassist(-1, function(n) {
 	assist("message address matched to " + jsarguments[n + 1] + ".");
 });
 
-
 function anything() {
 	if(inlet == 0) {
 		if(messagename[0] == '/') {
