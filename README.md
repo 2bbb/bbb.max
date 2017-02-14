@@ -86,6 +86,40 @@ input `(/foo/bar/baz 1 2 3)` to `[js osc.removetail.js 2]` then we got output `(
 
 like CNMAT OSC-Route.
 
+## patches
+
+### bbb.LCXL
+
+parse and treat midi message from *Launch Control XL*.
+
+attribute:
+
+* @port [default: "Launch Control XL"]
+* @preset [default: "bbb.LCXL.default.js"]
+
+output format:
+
+* ( "knob1" index value midi_ch )
+* ( "knob2" index value midi_ch )
+* ( "knob3" index value midi_ch )
+* ( "fader" index value midi_ch )
+* ( "button1" index value midi_ch )
+* ( "button2" index value midi_ch )
+* ( "cursor" index value midi_ch )
+* ( "other" index value midi_ch )
+
+where:
+* index is
+    * 0 - 3 (cursor and other)
+    * 0 - 7 (otherwise)
+* cursor 0, 1, 2, 3 means "Send Up", "Send Down", "Track Left", "Track Right"
+* other 0, 1, 2, 3 means "Device", "Mute", "Solo", "Record Arm"
+
+### bbb.LCXL.UI
+
+use with `bbb.LCXL`
+
+see bbb.LCXL.help
 ## Author
 
 * ISHII 2bit [bufferRenaiss co., ltd.]
