@@ -75,10 +75,11 @@ function extend(dst, src) {
 	}
 }
 
-function modulalize(obj) {
+function modulalize(obj, that) {
+	that = that || this;
 	try {
-		if(exports) {
-			extend(exports, obj);
+		if(that.exports) {
+			extend(that.exports, obj);
 		}
 	} catch(err) {
 		if(err.message != "exports is not defined") {
@@ -86,6 +87,13 @@ function modulalize(obj) {
 		}
 	}
 }
+
+// console
+
+console = {
+	log: postln,
+	error: errorln,
+};
 
 /* timer */
 function setTimeout(callback, delay) {
