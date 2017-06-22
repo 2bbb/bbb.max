@@ -53,10 +53,6 @@ similar to `arrayfromargs`.
 
 extend object.
 
-* function modulalize(you_wanna_exports_obj)
-
-if you want to use with both of styles `include` and `require`, use this function.
-
 * function setTimeout(callback, delay, args ...)
 * function setInterval(callback, delay, args ...)
 * function clearTimeout(timer)
