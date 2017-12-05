@@ -1,3 +1,5 @@
+post('bbb: using `osc.removehead.js` directly is deprecated. use `bbb.osc.removehead`\n');
+
 inlets = 2;
 var remove_rank = (0 ^ jsarguments[1]) || 1;
 

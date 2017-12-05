@@ -1,3 +1,5 @@
+post('bbb: using `osc.route.js` directly is deprecated. use `bbb.osc.route`\n');
+
 inlets = jsarguments.length;
 outlets = jsarguments.length;
 var remove_rank = (0 ^ jsarguments[1]) || 1;

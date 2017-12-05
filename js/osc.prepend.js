@@ -1,3 +1,5 @@
+post('bbb: using `osc.prepend.js` directly is deprecated. use `bbb.osc.prepend`\n');
+
 inlets = 2;
 var prepending_str = jsarguments[1] || "";
 

@@ -1,3 +1,5 @@
+post('bbb: using `osc.removetail.js` directly is deprecated. use `bbb.osc.removetail`\n');
+
 inlets = 2;
 var remove_rank = (0 ^ jsarguments[1]) || 1;
 

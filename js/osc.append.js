@@ -1,3 +1,5 @@
+post('bbb: using `osc.append.js` directly is deprecated. use `bbb.osc.append`\n');
+
 inlets = 2;
 var appending_str = jsarguments[1] || "";
 
