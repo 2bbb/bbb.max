@@ -112,6 +112,7 @@ function setInterval(callback, interval) {
 	var task = new Task(callback, this, args);
 	task.interval = interval;
 	task.repeat(-1, interval);
+	return task;
 };
 
 function clearInterval(task) {
