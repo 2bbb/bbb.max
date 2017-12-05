@@ -60,25 +60,25 @@ extend object.
 
 thin wrapper of `Task` to use like normal javascript.
 
-### osc.prepend.js
-### osc.append.js
+### bbb.osc.prepend
+### bbb.osc.append
 
 prepend/append component to address of osc message.
 
-input `(/foo 1 2 3)` to `[js osc.prepend.js /bar]` then we got output `(/bar/foo 1 2 3)`.
+input `(/foo 1 2 3)` to `[bbb.osc.prepend /bar]` then we got output `(/bar/foo 1 2 3)`.
 
-input `(/foo 1 2 3)` to `[js osc.append.js /bar]` then we got output `(/foo/bar 1 2 3)`.
+input `(/foo 1 2 3)` to `[bbb.osc.append /bar]` then we got output `(/foo/bar 1 2 3)`.
 
-### osc.removehead.js
-### osc.removetail.js
+### bbb.osc.removehead
+### bbb.osc.removetail
 
 remove component from address of osc message.
 
-input `(/foo/bar/baz 1 2 3)` to `[js osc.removehead.js 2]` then we got output `(/baz 1 2 3)`.
+input `(/foo/bar/baz 1 2 3)` to `[bbb.osc.removehead 2]` then we got output `(/baz 1 2 3)`.
 
-input `(/foo/bar/baz 1 2 3)` to `[js osc.removetail.js 2]` then we got output `(/foo 1 2 3)`.
+input `(/foo/bar/baz 1 2 3)` to `[bbb.osc.removetail 2]` then we got output `(/foo 1 2 3)`.
 
-### osc.route.js
+### bbb.osc.route
 
 like CNMAT OSC-Route.
 
