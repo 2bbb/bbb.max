@@ -95,19 +95,10 @@ console = {
 	error: errorln,
 };
 
-/* timer */
-function setTimeout(callback, delay) {
-	var args = arg2array(arguments, 2);
-	var task = new Task(callback, this, args);
-	task.schedule(delay);
-	return task;
-};
+bbb_tasks = [];
+bbb_timer = null;
 
-function clearTimeout(task) {
-	if(task instanceof Task && task.running) task.cancel();
-};
-
-function setInterval(callback, interval) {
+function setIntervalTask(callback, interval) {
 	var args = arg2array(arguments, 2);
 	var task = new Task(callback, this, args);
 	task.interval = interval;
@@ -115,9 +106,71 @@ function setInterval(callback, interval) {
 	return task;
 };
 
-function clearInterval(task) {
+function clearIntervalTask(task) {
 	if(task instanceof Task && task.running) task.cancel();
 };
+
+function Timer(callback, ms, is_loop) {
+	this.time = new Date().getTime();
+	this.callback = callback;
+	this.ms = ms;
+	this.is_loop = is_loop;
+};
+
+function startGlobalQueue() {
+	function a_task() {
+		var new_tasks = [];
+		var time = new Date().getTime();
+		for(var i = 0, length = bbb_tasks.length; i < length; ++i) {
+			var t = bbb_tasks[i];
+			if(t.time + t.ms < time) {
+				t.callback();
+				if(t.is_loop) {
+					t.time = time;
+				} else {
+					continue;
+				}
+			}
+			new_tasks.push(t);
+		}
+		bbb_tasks = new_tasks;
+		if(!bbb_tasks.length) {
+			clearIntervalTask(bbb_timer);
+			timer = null;
+		}
+	};
+	bbb_timer = setIntervalTask(a_task, 4);
+};
+
+function push_task(callback, ms, is_loop) {
+	var t = new Timer(callback, ms, is_loop);
+	bbb_tasks.push(t);
+	if(!bbb_timer) startGlobalQueue();
+	return t;
+}
+
+var setTimeout = function(callback, ms) {
+		return push_task(callback, ms, false);
+	},
+	clearTimeout = function(timer) {
+		bbb_tasks = bbb_tasks.filter(function(t) { return t != timer; });
+	},
+	setInterval = function(callback, ms) {
+		return push_task(callback, ms, true);
+	},
+	clearInterval = function(timer) {
+		bbb_tasks = bbb_tasks.filter(function(t) { return t != timer; });
+	},
+	clear = function() {
+		if(bbb_timer) {
+			clearIntervalTask(bbb_timer);
+			bbb_timer = null;
+		}
+	};
+
+function closebang() {
+	clear();
+}
 
 modulalize({
 	parsearguments: parsearguments,
