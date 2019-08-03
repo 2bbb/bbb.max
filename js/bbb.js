@@ -136,7 +136,7 @@ function startGlobalQueue() {
 		bbb_tasks = new_tasks;
 		if(!bbb_tasks.length) {
 			clearIntervalTask(bbb_timer);
-			timer = null;
+			bbb_timer = null;
 		}
 	};
 	bbb_timer = setIntervalTask(a_task, 4);
